@@ -13,10 +13,12 @@ class MainGame {
 		Player player = new Player(mynicname);
 		Inventory inven = new Inventory();
 		Shop shop = new Shop();
+		Dungeon dg = new Dungeon();
 
 		boolean isRun = true;
 		while (isRun) {
 			player.mystatus();
+			System.out.println(bar);
 			System.out.println("1. 던전입장");
 			System.out.println("2. 인벤토리");
 			System.out.println("3. 상점");
@@ -27,7 +29,7 @@ class MainGame {
 			int sel = sc.nextInt();
 
 			if (sel == 1) {
-				dungeonMenu();
+				dg.dungeonMenu();
 			} else if (sel == 2) {
 				inven.invenMenu();
 			} else if (sel == 3) {
@@ -44,15 +46,9 @@ class MainGame {
 		}
 	}
 
-	private void dungeonMenu() {
-		// TODO Auto-generated method stub
-
-	}
-
 	public String GameStart() {
 		System.out.println("<<MYRPG>>");
 		System.out.println(bar);
-		System.out.print("[1] 캐릭터 생성");
 		System.out.print("닉네임 : ");
 		String nickname = sc.next();
 		System.out.println(bar);

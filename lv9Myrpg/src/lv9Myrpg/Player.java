@@ -46,6 +46,7 @@ public class Player {
 		// TODO Auto-generated method stub
 
 	}
+	
 
 	public void mystatus() {
 		// TODO Auto-generated method stub
