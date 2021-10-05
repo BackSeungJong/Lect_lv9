@@ -1,10 +1,9 @@
 package lv9Myrpg;
 
-import java.util.ArrayList;
-
 public class Player {
+	public static Player instance = new Player("King");
 	public String nicname;
-	public int money;
+	public static int money;
 
 	// 속성
 	public int lv; // 1~10
@@ -21,17 +20,16 @@ public class Player {
 	public int addS = 0;
 
 	// 길드, 인벤토리
-	public Guild guild = new Guild();
-	public Inventory inven = new Inventory();
+	public static Guild guild = new Guild();
+	public static Inventory inven = new Inventory();
 
 	// 착용중인 아이템
-	public boolean myitem[] = { false, false, false };
-	public String item[] = { "무기", "방어구", "반지" };
-	public Item myItem[] = new Item[3];
+	public static boolean myitem[] = { false, false, false };
+	public static Item myItem[] = new Item[3];
 
 	public Player(String nicname) {
 		this.nicname = nicname;
-		this.money = 100000;
+		Player.money = 100000;
 
 		this.lv = 1;
 		this.exp = this.lv * 120;
@@ -42,32 +40,86 @@ public class Player {
 		this.S = 5;
 	}
 
-	public void guildMenu() {
-		// TODO Auto-generated method stub
-
-	}
-	
-
 	public void mystatus() {
 		// TODO Auto-generated method stub
-		System.out.println("[닉네임] " + nicname);
-		System.out.println("[능력치]");
-		System.out.printf("체력 : %d(+%d)\n", this.hp, this.addhp);
-		System.out.printf("공격력 : %d(+%d)\n", this.A, this.addA);
-		System.out.printf("방어력 : %d(+%d)\n", this.D, this.addD);
-		System.out.printf("속도 : %d(+%d)\n", this.S, this.addS);
-		System.out.println("[장비]");
+		System.out.println("<<닉네임>> " + nicname);
+		System.out.println("<<능력치>>");
+		System.out.printf("[체력] %d(+%d)\n", this.hp, this.addhp);
+		System.out.printf("[공격력] %d(+%d)\n", this.A, this.addA);
+		System.out.printf("[방어력] %d(+%d)\n", this.D, this.addD);
+		System.out.printf("[속도] %d(+%d)\n", this.S, this.addS);
+		System.out.println();
+		System.out.println("<<장비>>");
 		// 무기
-		int cnt = 1;
 		for (int i = 0; i < myitem.length; i++) {
 			if (myitem[i]) {
-				System.out.printf("%s : %d\n", item[i], myItem[i].power);
+				if (i == Item.WEAPON) {
+					System.out.printf("[%s] %s", Item.Weapon, myItem[i].name);
+					printitemstatus(i);
+				} else if (i == Item.ARMOR) {
+					System.out.printf("[%s] %s", Item.Armor, myItem[i].name);
+					printitemstatus(i);
+				} else if (i == Item.RING) {
+					System.out.printf("[%s] %s", Item.Ring, myItem[i].name);
+					printitemstatus(i);
+				}
 			} else {
 				System.out.println("착용X");
 			}
 		}
-		// 방어구
-		// 반지
 
 	}
+
+	public void printitemstatus(int i) {
+		System.out.println();
+		if (myItem[i].hp != 0) {
+			System.out.printf("[HP : +%d] ", myItem[i].hp);
+		}
+		if (myItem[i].A != 0) {
+			System.out.printf("[공격력 : +%d] ", myItem[i].A);
+		}
+		if (myItem[i].D != 0) {
+			System.out.printf("[방어력 : +%d] ", myItem[i].D);
+		}
+		if (myItem[i].S != 0) {
+			System.out.printf("[속도 : +%d] ", myItem[i].S);
+		}
+		System.out.println();
+	}
+
+	public void equipItem(Item item) {
+		if (myitem[item.kind]) {
+			this.addhp -= myItem[item.kind].hp;
+			this.addA -= myItem[item.kind].A;
+			this.addD -= myItem[item.kind].D;
+			this.addS -= myItem[item.kind].S;
+			myItem[item.kind].enable = true;
+		} else {
+			myitem[item.kind] = true;
+		}
+		myItem[item.kind] = item;
+		item.enable = false;
+		this.addhp += item.hp;
+		this.addA += item.A;
+		this.addD += item.D;
+		this.addS += item.S;
+	}
+
+	public void undressedItem(int index) {
+		// TODO Auto-generated method stub
+		if (myitem[index]) {
+			myitem[index] = false;
+			myItem[index].enable = true;
+			this.addhp -= myItem[index].hp;
+			this.addA -= myItem[index].A;
+			this.addD -= myItem[index].D;
+			this.addS -= myItem[index].S;
+			myItem[index] = null;
+		}
+	}
+
+	public void showMyMoney() {
+		System.out.printf("소지금 : %d\n", Player.money);
+	}
+
 }

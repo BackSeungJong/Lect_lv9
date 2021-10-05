@@ -5,19 +5,31 @@ import java.util.Scanner;
 class MainGame {
 	public static Scanner sc = new Scanner(System.in);
 
-	String bar = "-------------------------";
+	static String bar = "-------------------------";
+
+	public void init() {
+		Player.inven.inven.add(new Item(0, "나무칼", 0, 2, 0, 1, 100));
+		Player.inven.inven.add(new Item(0, "쇠칼", 0, 5, 1, 1, 100));
+		Player.inven.inven.add(new Item(1, "나무갑옷", 10, 0, 1, 0, 100));
+		Player.inven.inven.add(new Item(1, "쇠갑옷", 30, 0, 3, 0, 100));
+		Player.inven.inven.add(new Item(2, "용의반지", 10, 2, 2, 3, 100));
+
+	}
 
 	// 메인게임돌리기
 	public MainGame() {
-		String mynicname = GameStart();
-		Player player = new Player(mynicname);
-		Inventory inven = new Inventory();
+
+		// String mynicname = GameStart();
+		// Player player = new Player(mynicname);
+
 		Shop shop = new Shop();
 		Dungeon dg = new Dungeon();
 
+		init();
+
 		boolean isRun = true;
 		while (isRun) {
-			player.mystatus();
+			Player.instance.mystatus();
 			System.out.println(bar);
 			System.out.println("1. 던전입장");
 			System.out.println("2. 인벤토리");
@@ -27,15 +39,16 @@ class MainGame {
 			System.out.println("6. 로드");
 			System.out.println("0. 종료");
 			int sel = sc.nextInt();
+			System.out.println(bar);
 
 			if (sel == 1) {
 				dg.dungeonMenu();
 			} else if (sel == 2) {
-				inven.invenMenu();
+				Player.inven.invenMenu();
 			} else if (sel == 3) {
 				shop.shopMenu();
 			} else if (sel == 4) {
-				player.guildMenu();
+				Player.guild.guildMenu();
 			} else if (sel == 5) {
 
 			} else if (sel == 6) {
@@ -43,6 +56,9 @@ class MainGame {
 			} else if (sel == 0) {
 				isRun = false;
 			}
+			System.out.println();
+			// 정렬메소드
+			Player.inven.sort();
 		}
 	}
 
@@ -54,7 +70,6 @@ class MainGame {
 		System.out.println(bar);
 		return nickname;
 	}
-
 }
 
 public class Main {

@@ -15,22 +15,86 @@ public class Inventory {
 
 		if (sel == 1) {
 			// inven 에 있는 아이탬중 하나를 선택해서 player의
-			for (int i = 0; i < inven.size(); i++) {
-				if (inven.get(i).kind == Item.WEAPON) {
-					System.out.printf("[%d](%s) %s\n", i + 1, Item.Weapon, inven.get(i).name);
-				} else if (inven.get(i).kind == Item.WEAPON) {
-					System.out.printf("[%d](%s) %s\n", i + 1, Item.Armor, inven.get(i).name);
-				} else if (inven.get(i).kind == 2) {
-					System.out.printf("[%d](%s) %s\n", i + 1, Item.Ring, inven.get(i).name);
+			if (!inven.isEmpty()) {
+				for (int i = 0; i < inven.size(); i++) {
+					Player.inven.inven.get(i).showItemAbillty(i);
+					System.out.println();
 				}
-				System.out.println("[공격력 : ] [방어력 : ]");
+				System.out.print("선택 : ");
+				sel = MainGame.sc.nextInt() - 1;
+
+				if (sel >= 0 && sel < inven.size()) {
+					// 인덱스 : sel
+					// kind : inven.get(sel).kind
+					Player.instance.equipItem(inven.get(sel));
+
+					System.out.println("착용완료");
+				}
+			} else {
+				System.out.println("인벤토리 비었음");
 			}
+
 		} else if (sel == 2) {
+			if (Player.myitem[0] || Player.myitem[1] || Player.myitem[2]) {
 
+				for (int i = 0; i < Player.myitem.length; i++) {
+					if (Player.myitem[i]) {
+						if (Player.myItem[i].kind == Item.WEAPON) {
+							System.out.printf("[%d](%s) %s\n", 1, Item.Weapon, Player.myItem[i].name);
+						} else if (Player.myItem[i].kind == Item.ARMOR) {
+							System.out.printf("[%d](%s) %s\n", 2, Item.Armor, Player.myItem[i].name);
+						} else if (Player.myItem[i].kind == Item.RING) {
+							System.out.printf("[%d](%s) %s\n", 3, Item.Ring, Player.myItem[i].name);
+						}
+					}
+				}
+				System.out.print("선택 : ");
+				sel = MainGame.sc.nextInt() - 1;
+
+				if (sel >= 0 && sel <= Player.myitem.length) {
+					// index = sel
+					Player.instance.undressedItem(sel);
+					System.out.println("해제완료");
+				}
+			} else {
+				System.out.println("착용중인 아이템이 없습니다");
+			}
 		} else if (sel == 3) {
+			for (int i = 0; i < inven.size(); i++) {
+				Player.inven.inven.get(i).showItemAbillty(i);
+				System.out.println();
+			}
+			System.out.print("선택 : ");
+			sel = MainGame.sc.nextInt() - 1;
 
+			if (sel >= 0 && sel <= inven.size()) {
+				// 인덱스 : sel
+				// kind : inven.get(sel).kind
+				if (inven.get(sel).enable) {
+
+					inven.remove(sel);
+					System.out.println("버리기완료");
+				} else {
+					System.out.println("착용중인 아이탬입니다");
+				}
+			}
 		} else if (sel == 0) {
 
+		}
+	}
+
+	public void sort() {
+		// TODO Auto-generated method stub
+		for (int i = 0; i < inven.size() - 1; i++) {
+			int minidx = i;
+			for (int j = i + 1; j < inven.size(); j++) {
+				if (inven.get(j).kind < inven.get(minidx).kind) {
+					minidx = j;
+				}
+			}
+			Item tmp = inven.get(i);
+			inven.set(i, inven.get(minidx));
+			inven.set(minidx, tmp);
 		}
 	}
 
