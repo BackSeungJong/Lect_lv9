@@ -18,8 +18,10 @@ public class Unit {
 	public int addD = 0;
 	public int addS = 0;
 
-	public static boolean unititem[] = { false, false, false };
-	public static Item unitItem[] = new Item[3];
+//	public static boolean unititem[] = { false, false, false };
+//	public static Item unitItem[] = new Item[3];
+	public boolean unititem[] = { false, false, false };
+	public Item unitItem[] = new Item[3];
 
 	public Unit(String name, int hp, int A, int D, int S, int price) {
 		this.name = name;
@@ -40,7 +42,7 @@ public class Unit {
 		// [1] 이름 [lv] 1
 		// [Exp] :
 		// [체력 : ] [공격력 : ] [방어력 : ] [속도 : ]
-		System.out.printf("<<파티원 닉네임>> %s [lv] %d\n", this.name, this.lv);
+		System.out.printf("<<파티원 닉네임>> %s\n[lv] %d\n", this.name, this.lv);
 		System.out.printf("[Exp] %d\n", this.exp);
 		System.out.println("<<능력치>>");
 		System.out.printf("[체력] %d(+%d)\n", this.hp, this.addhp);
@@ -142,6 +144,7 @@ public class Unit {
 		for (int i = 0; i < unitItem.length; i++) {
 			if (unititem[i]) {
 				unititem[i] = false;
+				unitItem[i].enable=true;
 				unitItem[i] = null;
 			}
 		}

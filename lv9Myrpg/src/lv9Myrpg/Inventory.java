@@ -34,7 +34,6 @@ public class Inventory {
 
 		} else if (sel == 2) {
 			if (Player.myitem[0] || Player.myitem[1] || Player.myitem[2]) {
-
 				for (int i = 0; i < Player.myitem.length; i++) {
 					if (Player.myitem[i]) {
 						if (Player.myItem[i].kind == Item.WEAPON) {

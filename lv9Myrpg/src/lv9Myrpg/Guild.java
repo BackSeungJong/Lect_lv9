@@ -102,14 +102,11 @@ public class Guild {
 				sel = MainGame.sc.nextInt() - 1;
 
 				if (sel >= 0 && sel < Player.inven.inven.size()) {
-					// 인덱스 : sel
-					// kind : inven.get(sel).kind
 					Player.myParty.equipUnitItem(Player.inven.inven.get(sel));
-					System.out.println("착용완료");
 				}
 
 			} else if (sel == 2) {
-
+				//if(Player.myparty&&Player.myParty.unititem)
 			} else if (sel == 3) {
 
 			} else if (sel == 0) {
