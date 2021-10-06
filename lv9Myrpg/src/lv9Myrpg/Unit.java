@@ -89,7 +89,12 @@ public class Unit {
 
 	public void showUnitInfo() {
 		// TODO Auto-generated method stub
-		System.out.println("<<파티원 닉네임>> " + this.name);
+		System.out.print("<<파티원 닉네임>> " + this.name);
+		if (this.party) {
+			System.out.println(" (파티중)");
+		} else {
+			System.out.println();
+		}
 		System.out.println("<<능력치>>");
 		System.out.printf("[체력] %d(+%d)\n", this.hp, this.addhp);
 		System.out.printf("[공격력] %d(+%d)\n", this.A, this.addA);
@@ -98,14 +103,14 @@ public class Unit {
 		System.out.printf("가격 : %d\n", this.price);
 	}
 
-	public void equipUnitItem() {
-
+	public void equipUnitItem(Item item) {
+		
 	}
-
+//
 //	public void undressedUnitItem() {
 //		if (unititem[index]) {
-//			myitem[index] = false;
-//			myItem[index].enable = true;
+//			unititem[index] = false;
+//			unititem[index].enable = true;
 //			this.addhp -= myItem[index].hp;
 //			this.addA -= myItem[index].A;
 //			this.addD -= myItem[index].D;

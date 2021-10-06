@@ -39,12 +39,12 @@ public class Guild {
 		// TODO Auto-generated method stub
 		while (true) {
 			System.out.println("1. 파티관리");
-			System.out.println("2. 길드원목록");
+			System.out.println("2. 파티원영입");
 			System.out.println("0. 나가기");
 			int sel = MainGame.sc.nextInt();
 
 			if (sel == 1) {
-				showmyParty();
+				manageParty();
 			} else if (sel == 2) {
 				showAllUnit();
 			} else if (sel == 0) {
@@ -53,7 +53,7 @@ public class Guild {
 		}
 	}
 
-	private void showmyParty() {
+	private boolean showmyParty() {
 		// TODO Auto-generated method stub
 		if (Player.myparty) {
 			for (int i = 0; i < guildlist.size(); i++) {
@@ -61,8 +61,11 @@ public class Guild {
 					guildlist.get(i).showPartyInfo();
 				}
 			}
+			return true;
 		} else {
 			System.out.println("파티원이 존재하지 않습니다");
+			System.out.println();
+			return false;
 		}
 	}
 
@@ -77,45 +80,41 @@ public class Guild {
 		}
 		System.out.println(MainGame.bar);
 		// 두번째 메뉴 메서드
-		makePartyMenu();
+		selectParty();
 
-	}
-
-	public void makePartyMenu() {
-		while (true) {
-			System.out.println("1. 파티영입");
-			System.out.println("2. 새로고침");
-			System.out.println("0. 나가기");
-			int sel = MainGame.sc.nextInt();
-
-			if (sel == 1) {
-				selectParty();
-				manageParty();
-			} else if (sel == 2) {
-				guildlist.clear();
-				init();
-				break;
-			} else if (sel == 0) {
-				break;
-			}
-		}
 	}
 
 	private void manageParty() {
 		// TODO Auto-generated method stub
-		System.out.println("1. 장비장착");
-		System.out.println("2. 장비해제");
-		System.out.println("3. 파티퇴출");
-		System.out.println("0. 나가기");
-		int sel = MainGame.sc.nextInt();
+		while (showmyParty()) {
+			System.out.println("1. 장비장착");
+			System.out.println("2. 장비해제");
+			System.out.println("3. 파티퇴출");
+			System.out.println("0. 나가기");
+			int sel = MainGame.sc.nextInt();
 
-		if (sel == 1) {
+			if (sel == 1) {
+				for (int i = 0; i < Player.inven.inven.size(); i++) {
+					Player.inven.inven.get(i).showItemAbillty(i);
+					System.out.println();
+				}
+				System.out.print("선택 : ");
+				sel = MainGame.sc.nextInt() - 1;
 
-		} else if (sel == 2) {
+				if (sel >= 0 && sel < Player.inven.inven.size()) {
+					// 인덱스 : sel
+					// kind : inven.get(sel).kind
+					Player.myParty.equipUnitItem(Player.inven.inven.get(sel));
+					System.out.println("착용완료");
+				}
 
-		} else if (sel == 3) {
+			} else if (sel == 2) {
 
-		} else if (sel == 0) {
+			} else if (sel == 3) {
+
+			} else if (sel == 0) {
+				break;
+			}
 
 		}
 	}
@@ -125,18 +124,21 @@ public class Guild {
 		System.out.print("선택 : ");
 		int index = MainGame.sc.nextInt() - 1;
 
-		guildlist.get(index).party = true;
-		if (!Player.myparty) {
-			Player.myparty = true;
-			Player.myParty = guildlist.get(index);
-		} else {
-			Player.myParty.undressedAllUnitItem();
-			Player.myParty.party = false;
-			Player.myParty = guildlist.get(index);
+		if (index >= 0 && index < guildlist.size()) {
+			guildlist.get(index).party = true;
+			if (!Player.myparty) {
+				Player.myparty = true;
+				Player.myParty = guildlist.get(index);
+			} else {
+				Player.myParty.undressedAllUnitItem();
+				Player.myParty.party = false;
+				Player.myParty = guildlist.get(index);
 
+			}
+
+			System.out.println("파티생성완료");
+			System.out.println(MainGame.bar);
 		}
-
-		System.out.println("파티생성완료");
 	}
 
 }
