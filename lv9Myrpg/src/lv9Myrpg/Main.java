@@ -1,10 +1,11 @@
 package lv9Myrpg;
 
+import java.util.Random;
 import java.util.Scanner;
 
 class MainGame {
 	public static Scanner sc = new Scanner(System.in);
-
+	public static Random ran = new Random();
 	static String bar = "-------------------------";
 
 	public void init() {
@@ -25,7 +26,9 @@ class MainGame {
 		Shop shop = new Shop();
 		Dungeon dg = new Dungeon();
 
-		init();
+		init();// 인벤토리에 아이템세팅
+		shop.init();// 상점아이템세팅
+		Player.guild.init();
 
 		boolean isRun = true;
 		while (isRun) {

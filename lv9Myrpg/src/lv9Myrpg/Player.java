@@ -26,6 +26,8 @@ public class Player {
 	// 착용중인 아이템
 	public static boolean myitem[] = { false, false, false };
 	public static Item myItem[] = new Item[3];
+	public static boolean myparty = false;
+	public static Unit myParty;
 
 	public Player(String nicname) {
 		this.nicname = nicname;
@@ -42,7 +44,8 @@ public class Player {
 
 	public void mystatus() {
 		// TODO Auto-generated method stub
-		System.out.println("<<닉네임>> " + nicname);
+		System.out.printf("<<닉네임>> %s [lv] %d\n" + this.nicname, this.lv);
+		System.out.printf("[Exp] %d\n", this.exp);
 		System.out.println("<<능력치>>");
 		System.out.printf("[체력] %d(+%d)\n", this.hp, this.addhp);
 		System.out.printf("[공격력] %d(+%d)\n", this.A, this.addA);

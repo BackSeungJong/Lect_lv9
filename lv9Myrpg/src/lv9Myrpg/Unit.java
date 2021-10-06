@@ -1,7 +1,10 @@
 package lv9Myrpg;
 
 public class Unit {
+	public boolean party;
+
 	public String name;
+	public int price;
 	public int lv; // 1~10
 	public int exp;
 
@@ -18,7 +21,7 @@ public class Unit {
 	public static boolean unititem[] = { false, false, false };
 	public static Item unitItem[] = new Item[3];
 
-	public Unit(String name, int hp, int A, int D, int S) {
+	public Unit(String name, int hp, int A, int D, int S, int price) {
 		this.name = name;
 		this.lv = 1;
 		this.exp = 100;
@@ -27,13 +30,18 @@ public class Unit {
 		this.A = A;
 		this.D = D;
 		this.S = S;
+
+		this.price = price;
+		this.party = false;
 	}
 
-	public void showUnitInfo(int num) {
+	public void showPartyInfo() {
 		// TODO Auto-generated method stub
-		// [1] 이름
+		// [1] 이름 [lv] 1
+		// [Exp] :
 		// [체력 : ] [공격력 : ] [방어력 : ] [속도 : ]
-		System.out.println("<<닉네임>> " + this.name);
+		System.out.printf("<<파티원 닉네임>> %s [lv] %d\n" + this.name, this.lv);
+		System.out.printf("[Exp] %d\n", this.exp);
 		System.out.println("<<능력치>>");
 		System.out.printf("[체력] %d(+%d)\n", this.hp, this.addhp);
 		System.out.printf("[공격력] %d(+%d)\n", this.A, this.addA);
@@ -58,10 +66,36 @@ public class Unit {
 				System.out.println("착용X");
 			}
 		}
+
 	}
 
 	private void printiUnitItemstatus(int i) {
 		// TODO Auto-generated method stub
+		System.out.println();
+		if (unitItem[i].hp != 0) {
+			System.out.printf("[HP : +%d] ", unitItem[i].hp);
+		}
+		if (unitItem[i].A != 0) {
+			System.out.printf("[공격력 : +%d] ", unitItem[i].A);
+		}
+		if (unitItem[i].D != 0) {
+			System.out.printf("[방어력 : +%d] ", unitItem[i].D);
+		}
+		if (unitItem[i].S != 0) {
+			System.out.printf("[속도 : +%d] ", unitItem[i].S);
+		}
+		System.out.println();
+	}
 
+	public void showUnitInfo() {
+		// TODO Auto-generated method stub
+		System.out.println("<<파티원 닉네임>> " + this.name);
+		System.out.println("<<능력치>>");
+		System.out.printf("[체력] %d(+%d)\n", this.hp, this.addhp);
+		System.out.printf("[공격력] %d(+%d)\n", this.A, this.addA);
+		System.out.printf("[방어력] %d(+%d)\n", this.D, this.addD);
+		System.out.printf("[속도] %d(+%d)\n", this.S, this.addS);
+		System.out.printf("가격 : %d\n", this.price);
+		System.out.println();
 	}
 }

@@ -20,7 +20,6 @@ public class Shop {
 	}
 
 	public void shopMenu() {
-		init();
 		// TODO Auto-generated method stub
 		while (true) {
 			System.out.println("1. 구매");
