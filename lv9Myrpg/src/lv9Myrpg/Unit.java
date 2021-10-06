@@ -104,7 +104,26 @@ public class Unit {
 	}
 
 	public void equipUnitItem(Item item) {
-		
+		if (item.enable) {
+			if (unititem[item.kind]) {
+				this.addhp -= unitItem[item.kind].hp;
+				this.addA -= unitItem[item.kind].A;
+				this.addD -= unitItem[item.kind].D;
+				this.addS -= unitItem[item.kind].S;
+				unitItem[item.kind].enable = true;
+			} else {
+				unititem[item.kind] = true;
+			}
+			unitItem[item.kind] = item;
+			item.enable = false;
+			this.addhp += item.hp;
+			this.addA += item.A;
+			this.addD += item.D;
+			this.addS += item.S;
+			System.out.println("착용완료");
+		} else {
+			System.out.println("이미 착용중인 아이템입니다");
+		}
 	}
 //
 //	public void undressedUnitItem() {

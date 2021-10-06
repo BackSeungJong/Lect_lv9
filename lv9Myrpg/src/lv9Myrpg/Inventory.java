@@ -27,8 +27,6 @@ public class Inventory {
 					// 인덱스 : sel
 					// kind : inven.get(sel).kind
 					Player.instance.equipItem(inven.get(sel));
-
-					System.out.println("착용완료");
 				}
 			} else {
 				System.out.println("인벤토리 비었음");

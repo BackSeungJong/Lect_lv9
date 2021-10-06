@@ -91,21 +91,27 @@ public class Player {
 	}
 
 	public void equipItem(Item item) {
-		if (myitem[item.kind]) {
-			this.addhp -= myItem[item.kind].hp;
-			this.addA -= myItem[item.kind].A;
-			this.addD -= myItem[item.kind].D;
-			this.addS -= myItem[item.kind].S;
-			myItem[item.kind].enable = true;
-		} else {
-			myitem[item.kind] = true;
+		if(item.enable) {
+			if (myitem[item.kind]) {
+				this.addhp -= myItem[item.kind].hp;
+				this.addA -= myItem[item.kind].A;
+				this.addD -= myItem[item.kind].D;
+				this.addS -= myItem[item.kind].S;
+				myItem[item.kind].enable = true;
+			} else {
+				myitem[item.kind] = true;
+			}
+			myItem[item.kind] = item;
+			item.enable = false;
+			this.addhp += item.hp;
+			this.addA += item.A;
+			this.addD += item.D;
+			this.addS += item.S;
+			System.out.println("착용완료");
+		}else {
+			System.out.println("착용중인 아이템입니다");
+			System.out.println();
 		}
-		myItem[item.kind] = item;
-		item.enable = false;
-		this.addhp += item.hp;
-		this.addA += item.A;
-		this.addD += item.D;
-		this.addS += item.S;
 	}
 
 	public void undressedItem(int index) {
