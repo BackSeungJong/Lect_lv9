@@ -44,7 +44,7 @@ public class Player {
 
 	public void mystatus() {
 		// TODO Auto-generated method stub
-		System.out.printf("<<닉네임>> %s [lv] %d\n" + this.nicname, this.lv);
+		System.out.printf("<<닉네임>> %s\n[lv] %d\n" , this.nicname, this.lv);
 		System.out.printf("[Exp] %d\n", this.exp);
 		System.out.println("<<능력치>>");
 		System.out.printf("[체력] %d(+%d)\n", this.hp, this.addhp);

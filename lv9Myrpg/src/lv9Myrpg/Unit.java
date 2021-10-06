@@ -40,7 +40,7 @@ public class Unit {
 		// [1] 이름 [lv] 1
 		// [Exp] :
 		// [체력 : ] [공격력 : ] [방어력 : ] [속도 : ]
-		System.out.printf("<<파티원 닉네임>> %s [lv] %d\n" + this.name, this.lv);
+		System.out.printf("<<파티원 닉네임>> %s [lv] %d\n", this.name, this.lv);
 		System.out.printf("[Exp] %d\n", this.exp);
 		System.out.println("<<능력치>>");
 		System.out.printf("[체력] %d(+%d)\n", this.hp, this.addhp);
@@ -96,6 +96,31 @@ public class Unit {
 		System.out.printf("[방어력] %d(+%d)\n", this.D, this.addD);
 		System.out.printf("[속도] %d(+%d)\n", this.S, this.addS);
 		System.out.printf("가격 : %d\n", this.price);
-		System.out.println();
+	}
+
+	public void equipUnitItem() {
+
+	}
+
+//	public void undressedUnitItem() {
+//		if (unititem[index]) {
+//			myitem[index] = false;
+//			myItem[index].enable = true;
+//			this.addhp -= myItem[index].hp;
+//			this.addA -= myItem[index].A;
+//			this.addD -= myItem[index].D;
+//			this.addS -= myItem[index].S;
+//			myItem[index] = null;
+//		}
+//	}
+
+	public void undressedAllUnitItem() {
+		for (int i = 0; i < unitItem.length; i++) {
+			if (unititem[i]) {
+				unititem[i] = false;
+				unitItem[i] = null;
+			}
+		}
+		System.out.println("장비모두해제");
 	}
 }

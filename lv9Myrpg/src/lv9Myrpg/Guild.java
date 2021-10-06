@@ -69,8 +69,11 @@ public class Guild {
 	public void showAllUnit() {
 		System.out.println(MainGame.bar);
 		for (int i = 0; i < guildlist.size(); i++) {
+			System.out.printf("[%d] ", i + 1);
 			guildlist.get(i).showUnitInfo();
-			System.out.println();
+			if (i != guildlist.size() - 1) {
+				System.out.println();
+			}
 		}
 		System.out.println(MainGame.bar);
 		// 두번째 메뉴 메서드
@@ -86,13 +89,54 @@ public class Guild {
 			int sel = MainGame.sc.nextInt();
 
 			if (sel == 1) {
-				
+				selectParty();
+				manageParty();
 			} else if (sel == 2) {
-
+				guildlist.clear();
+				init();
+				break;
 			} else if (sel == 0) {
 				break;
 			}
 		}
+	}
+
+	private void manageParty() {
+		// TODO Auto-generated method stub
+		System.out.println("1. 장비장착");
+		System.out.println("2. 장비해제");
+		System.out.println("3. 파티퇴출");
+		System.out.println("0. 나가기");
+		int sel = MainGame.sc.nextInt();
+
+		if (sel == 1) {
+
+		} else if (sel == 2) {
+
+		} else if (sel == 3) {
+
+		} else if (sel == 0) {
+
+		}
+	}
+
+	private void selectParty() {
+		// TODO Auto-generated method stub
+		System.out.print("선택 : ");
+		int index = MainGame.sc.nextInt() - 1;
+
+		guildlist.get(index).party = true;
+		if (!Player.myparty) {
+			Player.myparty = true;
+			Player.myParty = guildlist.get(index);
+		} else {
+			Player.myParty.undressedAllUnitItem();
+			Player.myParty.party = false;
+			Player.myParty = guildlist.get(index);
+
+		}
+
+		System.out.println("파티생성완료");
 	}
 
 }
