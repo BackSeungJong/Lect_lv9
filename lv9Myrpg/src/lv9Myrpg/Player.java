@@ -53,24 +53,24 @@ public class Player {
 		System.out.printf("[방어력] %d(+%d)\n", this.D, this.addD);
 		System.out.printf("[속도] %d(+%d)\n", this.S, this.addS);
 		System.out.println();
-		System.out.println("<<장비>>");
+//		System.out.println("<<장비>>");
 		// 무기
-		for (int i = 0; i < myitem.length; i++) {
-			if (myitem[i]) {
-				if (i == Item.WEAPON) {
-					System.out.printf("[%s] %s", Item.Weapon, myItem[i].name);
-					printitemstatus(i);
-				} else if (i == Item.ARMOR) {
-					System.out.printf("[%s] %s", Item.Armor, myItem[i].name);
-					printitemstatus(i);
-				} else if (i == Item.RING) {
-					System.out.printf("[%s] %s", Item.Ring, myItem[i].name);
-					printitemstatus(i);
-				}
-			} else {
-				System.out.println("착용X");
-			}
-		}
+//		for (int i = 0; i < myitem.length; i++) {
+//			if (myitem[i]) {
+//				if (i == Item.WEAPON) {
+//					System.out.printf("[%s] %s", Item.Weapon, myItem[i].name);
+//					printitemstatus(i);
+//				} else if (i == Item.ARMOR) {
+//					System.out.printf("[%s] %s", Item.Armor, myItem[i].name);
+//					printitemstatus(i);
+//				} else if (i == Item.RING) {
+//					System.out.printf("[%s] %s", Item.Ring, myItem[i].name);
+//					printitemstatus(i);
+//				}
+//			} else {
+//				System.out.println("착용X");
+//			}
+//		}
 
 	}
 

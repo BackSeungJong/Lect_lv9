@@ -17,6 +17,12 @@ public class Inventory {
 	public void invenMenu() {
 		while (true) {
 			// TODO Auto-generated method stub
+			// 인벤토리에서 내 캐릭터 + 길드원 아이템모두 착용해제가능하게
+			//
+			//
+			//
+			//
+
 			System.out.println("1. 착용");
 			System.out.println("2. 해제");
 			System.out.println("3. 버리기");
