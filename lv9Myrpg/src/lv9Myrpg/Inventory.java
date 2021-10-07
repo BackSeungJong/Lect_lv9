@@ -6,16 +6,58 @@ public class Inventory {
 	public ArrayList<Item> inven = new ArrayList<Item>();
 
 	public void invenMenu() {
-		// TODO Auto-generated method stub
-		System.out.println("1. 착용");
-		System.out.println("2. 해제");
-		System.out.println("3. 버리기");
-		System.out.println("0. 뒤로가기");
-		int sel = MainGame.sc.nextInt();
+		while (true) {
+			// TODO Auto-generated method stub
+			System.out.println("1. 착용");
+			System.out.println("2. 해제");
+			System.out.println("3. 버리기");
+			System.out.println("0. 뒤로가기");
+			int sel = MainGame.sc.nextInt();
 
-		if (sel == 1) {
-			// inven 에 있는 아이탬중 하나를 선택해서 player의
-			if (!inven.isEmpty()) {
+			if (sel == 1) {
+				// inven 에 있는 아이탬중 하나를 선택해서 player의
+				if (!inven.isEmpty()) {
+					for (int i = 0; i < inven.size(); i++) {
+						Player.inven.inven.get(i).showItemAbillty(i);
+						System.out.println();
+					}
+					System.out.print("선택 : ");
+					sel = MainGame.sc.nextInt() - 1;
+
+					if (sel >= 0 && sel < inven.size()) {
+						// 인덱스 : sel
+						// kind : inven.get(sel).kind
+						Player.instance.equipItem(inven.get(sel));
+					}
+				} else {
+					System.out.println("인벤토리 비었음");
+				}
+
+			} else if (sel == 2) {
+				if (Player.myitem[0] || Player.myitem[1] || Player.myitem[2]) {
+					for (int i = 0; i < Player.myitem.length; i++) {
+						if (Player.myitem[i]) {
+							if (Player.myItem[i].kind == Item.WEAPON) {
+								System.out.printf("[%d](%s) %s\n", 1, Item.Weapon, Player.myItem[i].name);
+							} else if (Player.myItem[i].kind == Item.ARMOR) {
+								System.out.printf("[%d](%s) %s\n", 2, Item.Armor, Player.myItem[i].name);
+							} else if (Player.myItem[i].kind == Item.RING) {
+								System.out.printf("[%d](%s) %s\n", 3, Item.Ring, Player.myItem[i].name);
+							}
+						}
+					}
+					System.out.print("선택 : ");
+					sel = MainGame.sc.nextInt() - 1;
+
+					if (sel >= 0 && sel <= Player.myitem.length) {
+						// index = sel
+						Player.instance.undressedItem(sel);
+						System.out.println("해제완료");
+					}
+				} else {
+					System.out.println("착용중인 아이템이 없습니다");
+				}
+			} else if (sel == 3) {
 				for (int i = 0; i < inven.size(); i++) {
 					Player.inven.inven.get(i).showItemAbillty(i);
 					System.out.println();
@@ -23,61 +65,22 @@ public class Inventory {
 				System.out.print("선택 : ");
 				sel = MainGame.sc.nextInt() - 1;
 
-				if (sel >= 0 && sel < inven.size()) {
+				if (sel >= 0 && sel <= inven.size()) {
 					// 인덱스 : sel
 					// kind : inven.get(sel).kind
-					Player.instance.equipItem(inven.get(sel));
-				}
-			} else {
-				System.out.println("인벤토리 비었음");
-			}
+					if (inven.get(sel).enable) {
 
-		} else if (sel == 2) {
-			if (Player.myitem[0] || Player.myitem[1] || Player.myitem[2]) {
-				for (int i = 0; i < Player.myitem.length; i++) {
-					if (Player.myitem[i]) {
-						if (Player.myItem[i].kind == Item.WEAPON) {
-							System.out.printf("[%d](%s) %s\n", 1, Item.Weapon, Player.myItem[i].name);
-						} else if (Player.myItem[i].kind == Item.ARMOR) {
-							System.out.printf("[%d](%s) %s\n", 2, Item.Armor, Player.myItem[i].name);
-						} else if (Player.myItem[i].kind == Item.RING) {
-							System.out.printf("[%d](%s) %s\n", 3, Item.Ring, Player.myItem[i].name);
-						}
+						inven.remove(sel);
+						System.out.println("버리기완료");
+					} else {
+						System.out.println("착용중인 아이탬입니다");
 					}
 				}
-				System.out.print("선택 : ");
-				sel = MainGame.sc.nextInt() - 1;
-
-				if (sel >= 0 && sel <= Player.myitem.length) {
-					// index = sel
-					Player.instance.undressedItem(sel);
-					System.out.println("해제완료");
-				}
-			} else {
-				System.out.println("착용중인 아이템이 없습니다");
+			} else if (sel == 0) {
+				break;
 			}
-		} else if (sel == 3) {
-			for (int i = 0; i < inven.size(); i++) {
-				Player.inven.inven.get(i).showItemAbillty(i);
-				System.out.println();
-			}
-			System.out.print("선택 : ");
-			sel = MainGame.sc.nextInt() - 1;
-
-			if (sel >= 0 && sel <= inven.size()) {
-				// 인덱스 : sel
-				// kind : inven.get(sel).kind
-				if (inven.get(sel).enable) {
-
-					inven.remove(sel);
-					System.out.println("버리기완료");
-				} else {
-					System.out.println("착용중인 아이탬입니다");
-				}
-			}
-		} else if (sel == 0) {
-
 		}
+
 	}
 
 	public void sort() {

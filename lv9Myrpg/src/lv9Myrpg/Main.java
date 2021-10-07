@@ -29,7 +29,6 @@ class MainGame {
 		init();// 인벤토리에 아이템세팅
 		shop.init();// 상점아이템세팅
 		Player.guild.init();
-
 		boolean isRun = true;
 		while (isRun) {
 			Player.instance.mystatus();

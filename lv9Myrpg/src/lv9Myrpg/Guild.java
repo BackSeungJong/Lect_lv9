@@ -9,11 +9,33 @@ import java.util.ArrayList;
 public class Guild {
 	ArrayList<Unit> guildlist = new ArrayList<>();
 
+	public void guildMenu() {
+		// TODO Auto-generated method stub
+		while (true) {
+			System.out.println("1. 파티관리");
+			System.out.println("2. 파티원영입");
+			System.out.println("0. 나가기");
+			int sel = MainGame.sc.nextInt();
+
+			if (sel == 1) {
+				manageParty();
+			} else if (sel == 2) {
+				showAllUnit();
+			} else if (sel == 0) {
+				break;
+			}
+		}
+	}
+
 	public void init() {
 		// 파티원 생성
 		for (int i = 0; i < 5; i++) {
 			guildlist.add(makeUnit());
 		}
+		Player.myparty = true;
+		Player.myParty = guildlist.get(4);
+		guildlist.get(4).party = true;
+
 	}
 
 	public Unit makeUnit() {
@@ -33,24 +55,6 @@ public class Guild {
 		Unit tmp = new Unit(name, hp, A, D, S, price);
 
 		return tmp;
-	}
-
-	public void guildMenu() {
-		// TODO Auto-generated method stub
-		while (true) {
-			System.out.println("1. 파티관리");
-			System.out.println("2. 파티원영입");
-			System.out.println("0. 나가기");
-			int sel = MainGame.sc.nextInt();
-
-			if (sel == 1) {
-				manageParty();
-			} else if (sel == 2) {
-				showAllUnit();
-			} else if (sel == 0) {
-				break;
-			}
-		}
 	}
 
 	private boolean showmyParty() {
@@ -84,6 +88,7 @@ public class Guild {
 
 	}
 
+//파티관리
 	private void manageParty() {
 		// TODO Auto-generated method stub
 		while (showmyParty()) {
@@ -106,9 +111,9 @@ public class Guild {
 				}
 
 			} else if (sel == 2) {
-				//if(Player.myparty&&Player.myParty.unititem)
+				Player.myParty.undressedHub();
 			} else if (sel == 3) {
-
+				Player.myParty.throwoutGate();
 			} else if (sel == 0) {
 				break;
 			}
@@ -116,6 +121,7 @@ public class Guild {
 		}
 	}
 
+	// 파티선택
 	private void selectParty() {
 		// TODO Auto-generated method stub
 		System.out.print("선택 : ");

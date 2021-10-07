@@ -127,27 +127,85 @@ public class Unit {
 			System.out.println("이미 착용중인 아이템입니다");
 		}
 	}
-//
-//	public void undressedUnitItem() {
-//		if (unititem[index]) {
-//			unititem[index] = false;
-//			unititem[index].enable = true;
-//			this.addhp -= myItem[index].hp;
-//			this.addA -= myItem[index].A;
-//			this.addD -= myItem[index].D;
-//			this.addS -= myItem[index].S;
-//			myItem[index] = null;
-//		}
-//	}
 
+	// 장비 모두 해제
 	public void undressedAllUnitItem() {
 		for (int i = 0; i < unitItem.length; i++) {
 			if (unititem[i]) {
 				unititem[i] = false;
-				unitItem[i].enable=true;
+				unitItem[i].enable = true;
 				unitItem[i] = null;
 			}
 		}
 		System.out.println("장비모두해제");
+	}
+
+	// 해제 허브
+	public void undressedHub() {
+		// TODO Auto-generated method stub
+		showUnitItem();
+		System.out.println(MainGame.bar);
+		System.out.print("선택 : ");
+		int index = MainGame.sc.nextInt() - 1;
+
+		if (index >= 0 && index <= 3 && unititem[index]) {
+			undressedUnitItem(index);
+		} else {
+			System.out.println("확인하고 다시 입력해주세요");
+			System.out.println();
+		}
+	}
+
+	// 아이템 해제
+	public void undressedUnitItem(int index) {
+		unititem[index] = false;
+		unitItem[index].enable = true;
+		this.addhp -= unitItem[index].hp;
+		this.addA -= unitItem[index].A;
+		this.addD -= unitItem[index].D;
+		this.addS -= unitItem[index].S;
+		unitItem[index] = null;
+		System.out.println("모든장비 장착해제");
+		System.out.println();
+	}
+
+	// 장착아이템보여주기
+	public void showUnitItem() {
+		System.out.println("<<착용중인아이템>>");
+		if (unititem[0]) {
+			System.out.printf("[%d][%s] %s\n", 1, Item.Weapon, unitItem[0].name);
+		}
+		if (unititem[1]) {
+			System.out.printf("[%d][%s] %s\n", 2, Item.Armor, unitItem[1].name);
+		}
+		if (unititem[2]) {
+			System.out.printf("[%d][%s] %s\n", 3, Item.Ring, unitItem[2].name);
+		}
+	}
+
+	// 퇴출 게이트
+	public void throwoutGate() {
+		// TODO Auto-generated method stub
+		if (unititem[0] || unititem[1] || unititem[2]) {
+			System.out.println("파티원이 장비를 장착하고있습니다.");
+			System.out.println("모두 해제하고 파티를 해산하시겠습니까?");
+			System.out.println("1)네 2)아니오");
+			int sel = MainGame.sc.nextInt();
+
+			if (sel == 1) {
+				// 모든장비해제
+				undressedAllUnitItem();
+				// 파티강퇴
+				Player.myparty = false;
+				Player.myParty.party = false;
+				Player.myParty = null;
+				System.out.println("강퇴완료");
+			}
+		} else {
+			Player.myparty = false;
+			Player.myParty.party = false;
+			Player.myParty = null;
+			System.out.println("강퇴완료");
+		}
 	}
 }
