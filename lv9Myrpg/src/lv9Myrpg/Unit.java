@@ -105,6 +105,7 @@ public class Unit {
 		System.out.printf("가격 : %d\n", this.price);
 	}
 
+	// 장비장착
 	public void equipUnitItem(Item item) {
 		if (item.enable) {
 			if (unititem[item.kind]) {

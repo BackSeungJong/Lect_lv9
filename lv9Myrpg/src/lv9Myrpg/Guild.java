@@ -29,12 +29,9 @@ public class Guild {
 
 	public void init() {
 		// 파티원 생성
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 10; i++) {
 			guildlist.add(makeUnit());
 		}
-		Player.myparty = true;
-		Player.myParty = guildlist.get(4);
-		guildlist.get(4).party = true;
 
 	}
 

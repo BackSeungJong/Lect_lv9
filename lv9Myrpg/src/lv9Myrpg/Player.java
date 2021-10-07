@@ -44,7 +44,7 @@ public class Player {
 
 	public void mystatus() {
 		// TODO Auto-generated method stub
-		System.out.printf("<<닉네임>> %s\n[lv] %d\n" , this.nicname, this.lv);
+		System.out.printf("<<닉네임>> %s\n[lv] %d\n", this.nicname, this.lv);
 		System.out.printf("[Exp] %d\n", this.exp);
 		System.out.println("<<능력치>>");
 		System.out.printf("[체력] %d(+%d)\n", this.hp, this.addhp);
@@ -91,7 +91,7 @@ public class Player {
 	}
 
 	public void equipItem(Item item) {
-		if(item.enable) {
+		if (item.enable) {
 			if (myitem[item.kind]) {
 				this.addhp -= myItem[item.kind].hp;
 				this.addA -= myItem[item.kind].A;
@@ -108,7 +108,7 @@ public class Player {
 			this.addD += item.D;
 			this.addS += item.S;
 			System.out.println("착용완료");
-		}else {
+		} else {
 			System.out.println("착용중인 아이템입니다");
 			System.out.println();
 		}
