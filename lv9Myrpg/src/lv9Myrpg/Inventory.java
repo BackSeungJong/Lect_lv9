@@ -5,6 +5,15 @@ import java.util.ArrayList;
 public class Inventory {
 	public ArrayList<Item> inven = new ArrayList<Item>();
 
+	public void init() {
+		inven.add(new Item(0, "나무칼", 0, 2, 0, 1, 100));
+		inven.add(new Item(0, "쇠칼", 0, 5, 1, 1, 100));
+		inven.add(new Item(1, "나무갑옷", 10, 0, 1, 0, 100));
+		inven.add(new Item(1, "쇠갑옷", 30, 0, 3, 0, 100));
+		inven.add(new Item(2, "용의반지", 10, 2, 2, 3, 100));
+
+	}
+
 	public void invenMenu() {
 		while (true) {
 			// TODO Auto-generated method stub

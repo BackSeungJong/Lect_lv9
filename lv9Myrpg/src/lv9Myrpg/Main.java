@@ -8,15 +8,6 @@ class MainGame {
 	public static Random ran = new Random();
 	static String bar = "-------------------------";
 
-	public void init() {
-		Player.inven.inven.add(new Item(0, "나무칼", 0, 2, 0, 1, 100));
-		Player.inven.inven.add(new Item(0, "쇠칼", 0, 5, 1, 1, 100));
-		Player.inven.inven.add(new Item(1, "나무갑옷", 10, 0, 1, 0, 100));
-		Player.inven.inven.add(new Item(1, "쇠갑옷", 30, 0, 3, 0, 100));
-		Player.inven.inven.add(new Item(2, "용의반지", 10, 2, 2, 3, 100));
-
-	}
-
 	// 메인게임돌리기
 	public MainGame() {
 
@@ -26,9 +17,11 @@ class MainGame {
 		Shop shop = new Shop();
 		Dungeon dg = new Dungeon();
 
-		init();// 인벤토리에 아이템세팅
+		Player.inven.init();// 인벤토리에 아이템세팅
 		shop.init();// 상점아이템세팅
-		Player.guild.init();
+		Player.guild.init();// 길드세팅
+		dg.init();// 던전세팅
+
 		boolean isRun = true;
 		while (isRun) {
 			Player.instance.mystatus();
@@ -37,8 +30,9 @@ class MainGame {
 			System.out.println("2. 인벤토리");
 			System.out.println("3. 상점");
 			System.out.println("4. 길드");
-			System.out.println("5. 저장");
-			System.out.println("6. 로드");
+			System.out.println("5. 파티");
+			System.out.println("6. 저장");
+			System.out.println("7. 로드");
 			System.out.println("0. 종료");
 			int sel = sc.nextInt();
 			System.out.println(bar);
@@ -52,8 +46,10 @@ class MainGame {
 			} else if (sel == 4) {
 				Player.guild.guildMenu();
 			} else if (sel == 5) {
-
+				Player.partyMenu();
 			} else if (sel == 6) {
+
+			} else if (sel == 7) {
 
 			} else if (sel == 0) {
 				isRun = false;

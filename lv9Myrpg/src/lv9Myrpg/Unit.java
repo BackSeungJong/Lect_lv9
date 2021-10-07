@@ -1,7 +1,7 @@
 package lv9Myrpg;
 
 public class Unit {
-	public boolean party;
+	public boolean party; //파티 유무
 
 	public String name;
 	public int price;
@@ -184,29 +184,29 @@ public class Unit {
 		}
 	}
 
-	// 퇴출 게이트
-	public void throwoutGate() {
-		// TODO Auto-generated method stub
-		if (unititem[0] || unititem[1] || unititem[2]) {
-			System.out.println("파티원이 장비를 장착하고있습니다.");
-			System.out.println("모두 해제하고 파티를 해산하시겠습니까?");
-			System.out.println("1)네 2)아니오");
-			int sel = MainGame.sc.nextInt();
-
-			if (sel == 1) {
-				// 모든장비해제
-				undressedAllUnitItem();
-				// 파티강퇴
-				Player.myparty = false;
-				Player.myParty.party = false;
-				Player.myParty = null;
-				System.out.println("강퇴완료");
-			}
-		} else {
-			Player.myparty = false;
-			Player.myParty.party = false;
-			Player.myParty = null;
-			System.out.println("강퇴완료");
-		}
-	}
+//	// 퇴출 게이트
+//	public void throwoutGate() {
+//		// TODO Auto-generated method stub
+//		if (unititem[0] || unititem[1] || unititem[2]) {
+//			System.out.println("파티원이 장비를 장착하고있습니다.");
+//			System.out.println("모두 해제하고 파티를 해산하시겠습니까?");
+//			System.out.println("1)네 2)아니오");
+//			int sel = MainGame.sc.nextInt();
+//
+//			if (sel == 1) {
+//				// 모든장비해제
+//				undressedAllUnitItem();
+//				// 파티강퇴
+//				Player.myparty = false;
+//				Player.myParty.party = false;
+//				Player.myParty = null;
+//				System.out.println("강퇴완료");
+//			}
+//		} else {
+//			Player.myparty = false;
+//			Player.myParty.party = false;
+//			Player.myParty = null;
+//			System.out.println("강퇴완료");
+//		}
+//	}
 }

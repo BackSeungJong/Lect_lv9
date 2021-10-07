@@ -26,8 +26,8 @@ public class Player {
 	// 착용중인 아이템
 	public static boolean myitem[] = { false, false, false };
 	public static Item myItem[] = new Item[3];
-	public static boolean myparty = false;
-	public static Unit myParty;
+	public static boolean myparty[] = { false, false, false, false };
+	public static Unit myParty[] = new Unit[4];
 
 	public Player(String nicname) {
 		this.nicname = nicname;
@@ -42,6 +42,7 @@ public class Player {
 		this.S = 5;
 	}
 
+	// 내 능력치 상태표시
 	public void mystatus() {
 		// TODO Auto-generated method stub
 		System.out.printf("<<닉네임>> %s\n[lv] %d\n", this.nicname, this.lv);
@@ -73,6 +74,7 @@ public class Player {
 
 	}
 
+	// 아이템 능력치
 	public void printitemstatus(int i) {
 		System.out.println();
 		if (myItem[i].hp != 0) {
@@ -90,6 +92,7 @@ public class Player {
 		System.out.println();
 	}
 
+	// 장비 장착
 	public void equipItem(Item item) {
 		if (item.enable) {
 			if (myitem[item.kind]) {
@@ -114,6 +117,7 @@ public class Player {
 		}
 	}
 
+	// 장비해제
 	public void undressedItem(int index) {
 		// TODO Auto-generated method stub
 		if (myitem[index]) {
@@ -127,8 +131,135 @@ public class Player {
 		}
 	}
 
+	// 소지금 출력
 	public void showMyMoney() {
 		System.out.printf("소지금 : %d\n", Player.money);
 	}
 
+	// 파티관리
+	public static void partyMenu() {
+		// TODO Auto-generated method stub
+		while (true) {
+			System.out.println("1. 파티원 추가");
+			System.out.println("2. 파티원 삭제");
+			System.out.println("3. 파티원 교체");
+			System.out.println("0. 나가기");
+			int sel = MainGame.sc.nextInt();
+
+			if (sel == 1) {
+				int cnt = 0;
+				for (int i = 0; i < myparty.length; i++) {
+					if (!myparty[i]) {
+						cnt++;
+					}
+				}
+				if (cnt != 0) {
+					addparty();
+				} else {
+					System.out.println("파티가 가득 찼습니다.\n");
+				}
+			} else if (sel == 2) {
+				int cnt = 0;
+				for (int i = 0; i < myparty.length; i++) {
+					if (myparty[i]) {
+						cnt++;
+					}
+				}
+				if (cnt == 0) {
+					System.out.println("파티가 비었습니다.\n");
+				} else {
+					deleteparty();
+				}
+			} else if (sel == 3) {
+				int cnt = 0;
+				for (int i = 0; i < myparty.length; i++) {
+					if (myparty[i]) {
+						cnt++;
+					}
+				}
+				if (cnt == 0) {
+					System.out.println("파티가 비었습니다.\n");
+				} else {
+					replaceparty();
+				}
+			} else if (sel == 0) {
+				break;
+			}
+		}
+	}
+
+	// 파티관리 >> 파티원 추가
+	private static void addparty() {
+		// TODO Auto-generated method stub
+		guild.showAllUnit();
+		System.out.print("선택 : ");
+		int UnitIdx = MainGame.sc.nextInt() - 1;
+
+		if (UnitIdx >= 0 && UnitIdx < guild.guildlist.size() && !guild.guildlist.get(UnitIdx).party) {
+			for (int i = 0; i < myParty.length; i++) {
+				if (myparty[i]) {
+					System.out.printf("[%d] %s (lv.%d)\n", i + 1, myParty[i].name, myParty[i].lv);
+				} else {
+					System.out.printf("[%d] 비었음\n", i + 1);
+				}
+			}
+			System.out.print("자리 선택 : ");
+			int idx = MainGame.sc.nextInt() - 1;
+
+			if (idx >= 0 && idx < 4 && !myparty[idx]) {
+				myparty[idx] = true;
+				guild.guildlist.get(UnitIdx).party = true;
+				myParty[idx] = guild.guildlist.get(UnitIdx);
+				System.out.println("파티원 추가 완료\n");
+			}
+		}
+	}
+
+	// 파티관리 >> 파티원 삭제
+	private static void deleteparty() {
+		// TODO Auto-generated method stub
+		for (int i = 0; i < myParty.length; i++) {
+			if (myparty[i]) {
+				System.out.printf("[%d] %s (lv.%d)\n", i + 1, myParty[i].name, myParty[i].lv);
+			} else {
+				System.out.printf("[%d] 비었음\n", i + 1);
+			}
+		}
+		System.out.print("자리 선택 : ");
+		int idx = MainGame.sc.nextInt() - 1;
+
+		if (idx >= 0 && idx < myparty.length && myparty[idx]) {
+			myParty[idx].party = false;
+			myparty[idx] = false;
+			myParty[idx] = null;
+			System.out.println("파티강퇴 완료\n");
+		}
+	}
+
+	// 파티관리 >> 파티원 교체
+	private static void replaceparty() {
+		// TODO Auto-generated method stub
+		for (int i = 0; i < myParty.length; i++) {
+			if (myparty[i]) {
+				System.out.printf("[%d] %s (lv.%d)\n", i + 1, myParty[i].name, myParty[i].lv);
+			} else {
+				System.out.printf("[%d] 비었음\n", i + 1);
+			}
+		}
+		System.out.print("자리 선택 : ");
+		int idx = MainGame.sc.nextInt() - 1;
+
+		if (idx >= 0 && idx < myparty.length && myparty[idx]) {
+			guild.showAllUnit();
+			System.out.print("선택 : ");
+			int UnitIdx = MainGame.sc.nextInt() - 1;
+
+			if (UnitIdx >= 0 && UnitIdx < guild.guildlist.size() && !guild.guildlist.get(UnitIdx).party) {
+				myParty[idx].party = false;
+				myParty[idx] = guild.guildlist.get(UnitIdx);
+				myParty[idx].party = true;
+				System.out.println("파티교체 완료\n");
+			}
+		}
+	}
 }
