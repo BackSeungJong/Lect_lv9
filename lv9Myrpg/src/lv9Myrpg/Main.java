@@ -20,7 +20,7 @@ class MainGame {
 		Player.inven.init();// 인벤토리에 아이템세팅
 		shop.init();// 상점아이템세팅
 		Player.guild.init();// 길드세팅
-		dg.init();// 던전세팅
+		dg.init();// 몬스터세팅
 
 		boolean isRun = true;
 		while (isRun) {

@@ -3,10 +3,12 @@ package lv9Myrpg;
 public class Unit {
 	public boolean party; // 파티 유무
 
+	public int turn;
 	public String name;
 	public int lv; // 1~10
 	public int exp;
 
+	public int tmphp;
 	public int hp;// 체력
 	public int A;// 공격력
 	public int D;// 방어력

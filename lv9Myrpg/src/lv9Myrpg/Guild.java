@@ -38,27 +38,27 @@ public class Guild {
 		}
 
 		// default 파티생성
-//		int cnt = 0;
-//		for (int i = 0; i < 4; i++) {
-//			int idx = MainGame.ran.nextInt(guildlist.size());
-//			if (!guildlist.get(idx).party) {
-//				guildlist.get(idx).party = true;
-//				Player.myparty[cnt] = true;
-//				Player.myParty[cnt] = guildlist.get(idx);
-//				cnt++;
-//			} else {
-//				i--;
-//			}
-//		}
-		guildlist.get(0).party = true;
-		Player.myparty[0] = true;
-		Player.myParty[0] = guildlist.get(0);
-		guildlist.get(2).party = true;
-		Player.myparty[2] = true;
-		Player.myParty[2] = guildlist.get(2);
-		guildlist.get(3).party = true;
-		Player.myparty[3] = true;
-		Player.myParty[3] = guildlist.get(3);
+		int cnt = 0;
+		for (int i = 0; i < 4; i++) {
+			int idx = MainGame.ran.nextInt(guildlist.size());
+			if (!guildlist.get(idx).party) {
+				guildlist.get(idx).party = true;
+				Player.myparty[cnt] = true;
+				Player.myParty[cnt] = guildlist.get(idx);
+				cnt++;
+			} else {
+				i--;
+			}
+		}
+//		guildlist.get(0).party = true;
+//		Player.myparty[0] = true;
+//		Player.myParty[0] = guildlist.get(0);
+//		guildlist.get(2).party = true;
+//		Player.myparty[2] = true;
+//		Player.myParty[2] = guildlist.get(2);
+//		guildlist.get(3).party = true;
+//		Player.myparty[3] = true;
+//		Player.myParty[3] = guildlist.get(3);
 
 	}
 
@@ -70,9 +70,9 @@ public class Guild {
 		String name = n1[MainGame.ran.nextInt(n1.length)];
 		name += n2[MainGame.ran.nextInt(n1.length)];
 		name += n3[MainGame.ran.nextInt(n1.length)];
-		int ran = MainGame.ran.nextInt(8) + 2;
-		int hp = ran * 11;
-		int A = ran + 1;
+		int ran = MainGame.ran.nextInt(8) + 2;// 2~9
+		int hp = ran * 30;
+		int A = ran + 30;
 		int D = ran / 2 + 1;
 		int S = MainGame.ran.nextInt(2) + 1;
 		Unit tmp = new Unit(name, hp, A, D, S);

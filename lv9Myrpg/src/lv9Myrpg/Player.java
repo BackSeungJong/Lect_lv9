@@ -4,12 +4,15 @@ public class Player {
 	public static Player instance = new Player("King");
 	public String nicname;
 	public static int money;
+	public static boolean heart;
+	public int turn;
 
 	// 속성
 	public int lv; // 1~10
 	public int exp;
 
-	public int hp;// 체력
+	public int hp;
+	public int tmphp;// 체력
 	public int A;// 공격력
 	public int D;// 방어력
 	public int S;// 속도
@@ -32,6 +35,7 @@ public class Player {
 	public Player(String nicname) {
 		this.nicname = nicname;
 		Player.money = 100000;
+		Player.heart = true;
 
 		this.lv = 1;
 		this.exp = this.lv * 120;
@@ -276,8 +280,8 @@ public class Player {
 				myParty[i].showPartyAllInfo();
 			}
 		}
-		System.out.println("-------[인벤토리]-------");
-		inven.showAllItem();
+//		System.out.println("-------[인벤토리]-------");
+//		inven.showAllItem();
 		System.out.println(MainGame.bar);
 	}
 }
