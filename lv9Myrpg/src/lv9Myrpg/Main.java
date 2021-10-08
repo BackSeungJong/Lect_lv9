@@ -31,8 +31,9 @@ class MainGame {
 			System.out.println("3. 상점");
 			System.out.println("4. 길드");
 			System.out.println("5. 파티");
-			System.out.println("6. 저장");
-			System.out.println("7. 로드");
+			System.out.println("6. 내 상태");
+			System.out.println("7. 저장");
+			System.out.println("8. 로드");
 			System.out.println("0. 종료");
 			int sel = sc.nextInt();
 			System.out.println(bar);
@@ -48,8 +49,10 @@ class MainGame {
 			} else if (sel == 5) {
 				Player.partyMenu();
 			} else if (sel == 6) {
-
+				Player.instance.showMyAllState();
 			} else if (sel == 7) {
+
+			} else if (sel == 8) {
 
 			} else if (sel == 0) {
 				isRun = false;

@@ -14,6 +14,13 @@ public class Inventory {
 
 	}
 
+	public void showAllItem() {
+		for (int i = 0; i < inven.size(); i++) {
+			inven.get(i).showItemAbillty(i);
+			System.out.println();
+		}
+	}
+
 	public void invenMenu() {
 		while (true) {
 			// TODO Auto-generated method stub
@@ -32,18 +39,37 @@ public class Inventory {
 			if (sel == 1) {
 				// inven 에 있는 아이탬중 하나를 선택해서 player의
 				if (!inven.isEmpty()) {
-					for (int i = 0; i < inven.size(); i++) {
-						Player.inven.inven.get(i).showItemAbillty(i);
-						System.out.println();
-					}
+					showAllItem();
 					System.out.print("선택 : ");
-					sel = MainGame.sc.nextInt() - 1;
+					int index = MainGame.sc.nextInt() - 1; // 인벤토리 속 아이템 인덱스
 
-					if (sel >= 0 && sel < inven.size()) {
-						// 인덱스 : sel
-						// kind : inven.get(sel).kind
-						Player.instance.equipItem(inven.get(sel));
+					System.out.println("1. 내 캐릭터 장착");
+					System.out.println("2. 파티원 장착");
+					sel = MainGame.sc.nextInt();
+
+					if (sel == 1) {
+						if (index >= 0 && index < inven.size()) {
+							Player.instance.equipItem(inven.get(index));
+						}
+					} else if (sel == 2) {
+						for (int i = 0; i < Player.myparty.length; i++) {
+							if (Player.myparty[i]) {
+								System.out.printf("[%d] %s\n", i + 1, Player.myParty[i].name);
+								Player.myParty[i].showUnitItem();
+
+							} else {
+								System.out.printf("[%d] 파티원 X\n\n", i + 1);
+							}
+						}
+						// 장착 프로세스
+						System.out.print("선택 : ");
+						sel = MainGame.sc.nextInt() - 1;
+
+						if (sel >= 0 && sel < Player.myparty.length && Player.myparty[sel]) {
+							Player.myParty[sel].equipUnitItem(inven.get(index));
+						}
 					}
+
 				} else {
 					System.out.println("인벤토리 비었음");
 				}

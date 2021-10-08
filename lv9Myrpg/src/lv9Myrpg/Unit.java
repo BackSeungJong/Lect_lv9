@@ -1,10 +1,9 @@
 package lv9Myrpg;
 
 public class Unit {
-	public boolean party; //파티 유무
+	public boolean party; // 파티 유무
 
 	public String name;
-	public int price;
 	public int lv; // 1~10
 	public int exp;
 
@@ -23,7 +22,7 @@ public class Unit {
 	public boolean unititem[] = { false, false, false };
 	public Item unitItem[] = new Item[3];
 
-	public Unit(String name, int hp, int A, int D, int S, int price) {
+	public Unit(String name, int hp, int A, int D, int S) {
 		this.name = name;
 		this.lv = 1;
 		this.exp = 100;
@@ -33,11 +32,10 @@ public class Unit {
 		this.D = D;
 		this.S = S;
 
-		this.price = price;
 		this.party = false;
 	}
 
-	public void showPartyInfo() {
+	public void showPartyAllInfo() {
 		// TODO Auto-generated method stub
 		// [1] 이름 [lv] 1
 		// [Exp] :
@@ -68,7 +66,7 @@ public class Unit {
 				System.out.println("착용X");
 			}
 		}
-
+		System.out.println();
 	}
 
 	private void printiUnitItemstatus(int i) {
@@ -102,7 +100,6 @@ public class Unit {
 		System.out.printf("[공격력] %d(+%d)\n", this.A, this.addA);
 		System.out.printf("[방어력] %d(+%d)\n", this.D, this.addD);
 		System.out.printf("[속도] %d(+%d)\n", this.S, this.addS);
-		System.out.printf("가격 : %d\n", this.price);
 	}
 
 	// 장비장착
@@ -175,13 +172,20 @@ public class Unit {
 		System.out.println("<<착용중인아이템>>");
 		if (unititem[0]) {
 			System.out.printf("[%d][%s] %s\n", 1, Item.Weapon, unitItem[0].name);
+		} else {
+			System.out.printf("[%d][%s] 비었음\n", 1, Item.Weapon);
 		}
 		if (unititem[1]) {
 			System.out.printf("[%d][%s] %s\n", 2, Item.Armor, unitItem[1].name);
+		} else {
+			System.out.printf("[%d][%s] 비었음\n", 2, Item.Armor);
 		}
 		if (unititem[2]) {
 			System.out.printf("[%d][%s] %s\n", 3, Item.Ring, unitItem[2].name);
+		} else {
+			System.out.printf("[%d][%s] 비었음\n", 3, Item.Ring);
 		}
+		System.out.println();
 	}
 
 //	// 퇴출 게이트

@@ -75,8 +75,7 @@ public class Guild {
 		int A = ran + 1;
 		int D = ran / 2 + 1;
 		int S = MainGame.ran.nextInt(2) + 1;
-		int price = MainGame.ran.nextInt(6001) + 3000;
-		Unit tmp = new Unit(name, hp, A, D, S, price);
+		Unit tmp = new Unit(name, hp, A, D, S);
 
 		return tmp;
 	}
@@ -202,7 +201,7 @@ public class Guild {
 		// TODO Auto-generated method stub
 		for (int i = 0; i < Player.myparty.length; i++) {
 			if (Player.myparty[i]) {
-				guildlist.get(i).showPartyInfo();
+				guildlist.get(i).showPartyAllInfo();
 			} else {
 				System.out.println("파티원이 존재하지 않습니다");
 				System.out.println();

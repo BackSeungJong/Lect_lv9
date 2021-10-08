@@ -53,28 +53,31 @@ public class Player {
 		System.out.printf("[방어력] %d(+%d)\n", this.D, this.addD);
 		System.out.printf("[속도] %d(+%d)\n", this.S, this.addS);
 		System.out.println();
-//		System.out.println("<<장비>>");
-		// 무기
-//		for (int i = 0; i < myitem.length; i++) {
-//			if (myitem[i]) {
-//				if (i == Item.WEAPON) {
-//					System.out.printf("[%s] %s", Item.Weapon, myItem[i].name);
-//					printitemstatus(i);
-//				} else if (i == Item.ARMOR) {
-//					System.out.printf("[%s] %s", Item.Armor, myItem[i].name);
-//					printitemstatus(i);
-//				} else if (i == Item.RING) {
-//					System.out.printf("[%s] %s", Item.Ring, myItem[i].name);
-//					printitemstatus(i);
-//				}
-//			} else {
-//				System.out.println("착용X");
-//			}
-//		}
 
 	}
 
-	// 아이템 능력치
+	// 장비 보여주기
+	public void showMyEquipment() {
+		System.out.println("<<장비>>");
+		for (int i = 0; i < myitem.length; i++) {
+			if (myitem[i]) {
+				if (i == Item.WEAPON) {
+					System.out.printf("[%s] %s", Item.Weapon, myItem[i].name);
+					printitemstatus(i);
+				} else if (i == Item.ARMOR) {
+					System.out.printf("[%s] %s", Item.Armor, myItem[i].name);
+					printitemstatus(i);
+				} else if (i == Item.RING) {
+					System.out.printf("[%s] %s", Item.Ring, myItem[i].name);
+					printitemstatus(i);
+				}
+			} else {
+				System.out.println("착용X");
+			}
+		}
+	}
+
+	// 장비 보여주기 >> 아이템 능력치
 	public void printitemstatus(int i) {
 		System.out.println();
 		if (myItem[i].hp != 0) {
@@ -256,10 +259,25 @@ public class Player {
 
 			if (UnitIdx >= 0 && UnitIdx < guild.guildlist.size() && !guild.guildlist.get(UnitIdx).party) {
 				myParty[idx].party = false;
+				myParty[idx].undressedAllUnitItem();
 				myParty[idx] = guild.guildlist.get(UnitIdx);
 				myParty[idx].party = true;
 				System.out.println("파티교체 완료\n");
 			}
 		}
+	}
+
+	public void showMyAllState() {
+		mystatus();
+		showMyEquipment();
+		System.out.println("-------[길드원]-------");
+		for (int i = 0; i < myParty.length; i++) {
+			if (myparty[i]) {
+				myParty[i].showPartyAllInfo();
+			}
+		}
+		System.out.println("-------[인벤토리]-------");
+		inven.showAllItem();
+		System.out.println(MainGame.bar);
 	}
 }
