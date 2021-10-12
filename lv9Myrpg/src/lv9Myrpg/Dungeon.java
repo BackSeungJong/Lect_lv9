@@ -5,24 +5,15 @@ import java.util.ArrayList;
 public class Dungeon {
 	ArrayList<Monster> monsterlist = new ArrayList<Monster>();
 	ArrayList<Monster> enemy = new ArrayList<Monster>();
+	public int totalExp;
 
 	public void dungeonMenu() {
 		//
-		enemySet();
 		// 나의 상태, 파티인원 상태 표시하는 메서드
 		Player.instance.showMyAllState();
 
-		System.out.println(MainGame.bar);
-		System.out.println(Player.instance.S);
-		System.out.println("-----");
-		for (int i = 0; i < Player.myParty.length; i++) {
-			System.out.println(Player.myParty[i].S);
-		}
-		System.out.println("-----");
-		for (int i = 0; i < enemy.size(); i++) {
-			System.out.println(enemy.get(i).S);
-		}
-		System.out.println(MainGame.bar);
+		// 적 세팅 및 적 상태 표시하는 메서드
+		enemySet();
 
 		// 파티원이 부족할 경우 입장불가
 		if (checkParty()) {
@@ -49,12 +40,12 @@ public class Dungeon {
 	// 몬스터 만들기
 	public Monster makeMonster() {
 		String monName[] = { "캥거루", "토끼", "강아지", "고양이", "코알라", "고릴라", "원숭이", "고래", "낙타", "뱀", "물개", "쥐", "소", "말", "돼지",
-				"거북이", "악어", "호랑이", "표범", "치타", "늑대", "여우", " 스컹크", "두더지", "돌고래", "도마뱀", " 독소리", "바다표범", " 가재", "랍스타" };
+				"거북이", "악어", "호랑이", "표범", "치타", "늑대", "여우", "스컹크", "두더지", "돌고래", "도마뱀", "독수리", "바다표범", "가재", "랍스타" };
 		String name = monName[MainGame.ran.nextInt(monName.length)];
-		int exp = MainGame.ran.nextInt(201) + 100;
+		int exp = MainGame.ran.nextInt(501) + 100;
 		int num = MainGame.ran.nextInt(3) + 1;
-		int hp = num * 500;
-		int A = num;
+		int hp = num * 100;
+		int A = num + 35;
 		int D = num;
 		int S = num + 5;
 		return new Monster(name, exp, hp, A, D, S);
@@ -71,12 +62,24 @@ public class Dungeon {
 				i--;
 			}
 		}
-		System.out.println("set 종료");
+		// 몬스터 속성보여주기
+		System.out.println("==[몬스터 라인업]==");
+		showMonsterStatus();
+	}
+
+	private void showMonsterStatus() {
 		for (int i = 0; i < enemy.size(); i++) {
-			System.out.println(enemy.get(i).name);
-			System.out.println(enemy.get(i).S);
+			totalExp += enemy.get(i).exp;
+
+			System.out.printf("[%d] %s\n", i + 1, enemy.get(i).name);
+			System.out.printf("[체력] %d\n", enemy.get(i).hp);
+			System.out.printf("[공격력] %d\n", enemy.get(i).A);
+			System.out.printf("[방어력] %d\n", enemy.get(i).D);
+			System.out.printf("[속도] %d\n", enemy.get(i).S);
 			System.out.println();
 		}
+		System.out.println("던전 총 경험치 : " + totalExp);
+		System.out.println(MainGame.bar);
 	}
 
 	private void battle() {
@@ -96,9 +99,6 @@ public class Dungeon {
 			}
 		}
 		int maxData = max;
-		System.out.println("제일큰값 : " + max);
-		System.out.println("제일큰값 : " + maxData);
-
 		// ---------------------------------------------------------------------------------
 		boolean win = false;
 		boolean isRun = true;
@@ -150,20 +150,52 @@ public class Dungeon {
 			if (max == 0) {
 				max = maxData;
 			}
-//			try {
-//				Thread.sleep(500);
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			cnt++;
 		}
 		// ------------------------------------------------------------------------------
 
 		if (win) {
 			System.out.println("던전클리어!");
+			System.out.println();
+			reward();
 		} else {
 			System.out.println("던전클리어 실패. . .");
+		}
+	}
+
+	// 경험치 분배 및 레벨업 확인메서드
+	public void reward() {
+		int cnt = 1;
+		for (int i = 0; i < Player.myparty.length; i++) {
+			if (Player.myparty[i]) {
+				cnt++;
+			}
+		}
+		double personalExp = totalExp / cnt;
+		System.out.println("totalExp : " + totalExp);
+		System.out.println("personalExp : " + personalExp);
+		Player.instance.exp += personalExp;
+		while (Player.instance.lv < 10 && Player.instance.exp >= Player.instance.EXP[Player.instance.lv - 1]) {
+			Player.instance.exp -= Player.instance.EXP[Player.instance.lv - 1];
+			Player.instance.lvUp();
+			
+		}
+		for (int i = 0; i < Player.myparty.length; i++) {
+			if (Player.myparty[i]) {
+				Player.myParty[i].exp += personalExp;
+				while (Player.myParty[i].lv < 10
+						&& Player.myParty[i].exp >= Player.instance.EXP[Player.myParty[i].lv - 1]) {
+					Player.myParty[i].exp -= Player.instance.EXP[Player.myParty[i].lv - 1];
+					Player.myParty[i].lv++;
+					System.out.printf("%s레벨업!\n", Player.myParty[i].name);
+				}
+			}
 		}
 	}
 
@@ -171,10 +203,10 @@ public class Dungeon {
 	public void playerAttack() {
 		int attack = MainGame.ran.nextInt(enemy.size());
 
-		System.out.printf("PLAYER -> %s\n", enemy.get(attack).name);
+		System.out.printf("PLAYER -> %s([HP]%d)\n", enemy.get(attack).name, enemy.get(attack).tmphp);
 
 		if (Player.instance.A > enemy.get(attack).D) {
-			System.out.printf("공격성공.\n");
+			System.out.printf("공격성공! %d데미지\n", Player.instance.A - enemy.get(attack).D);
 			enemy.get(attack).tmphp -= Player.instance.A - enemy.get(attack).D;
 			if (enemy.get(attack).tmphp <= 0) {
 				System.out.printf("%s가 사망했다.\n", enemy.get(attack).name);
@@ -190,10 +222,10 @@ public class Dungeon {
 	public void partyAttack(Unit party) {
 		int attack = MainGame.ran.nextInt(enemy.size());
 
-		System.out.printf("%s -> %s\n", party.name, enemy.get(attack).name);
+		System.out.printf("%s -> %s([HP])%d\n", party.name, enemy.get(attack).name, enemy.get(attack).tmphp);
 
 		if (party.A > enemy.get(attack).D) {
-			System.out.printf("공격성공.\n");
+			System.out.printf("공격성공! %d데미지\n", party.A - enemy.get(attack).D);
 			enemy.get(attack).tmphp -= party.A - enemy.get(attack).D;
 			if (enemy.get(attack).tmphp <= 0) {
 				System.out.printf("%s가 사망했다.\n", enemy.get(attack).name);
@@ -218,15 +250,15 @@ public class Dungeon {
 				break;
 			}
 		}
-		System.out.println();
+		// System.out.println();
 	}
 
 	// 플레이가 맞기
 	public void playerDefend(Monster enemy) {
-		System.out.printf("%s -> %s\n", enemy.name, "PLAYER");
+		System.out.printf("%s -> %s([HP]%d)\n", enemy.name, "PLAYER", Player.instance.tmphp);
 
 		if (enemy.A > Player.instance.D) {
-			System.out.printf("공격성공.\n");
+			System.out.printf("공격성공! %d데미지\n", enemy.A - Player.instance.D);
 			Player.instance.tmphp -= enemy.A - Player.instance.D;
 			if (Player.instance.tmphp <= 0) {
 				System.out.printf("%s가 사망했다.\n", "PLAYER");
@@ -240,10 +272,10 @@ public class Dungeon {
 
 	// 파티원이 맞기
 	public void partyDefend(Monster enemy, Unit party) {
-		System.out.printf("%s -> %s\n", enemy.name, party.name);
+		System.out.printf("%s -> %s([HP]%d)\n", enemy.name, party.name, party.tmphp);
 
 		if (enemy.A > party.D) {
-			System.out.printf("공격성공.\n");
+			System.out.printf("공격성공! %d데미지\n", enemy.A - party.D);
 			party.tmphp -= enemy.A - party.D;
 			if (party.tmphp <= 0) {
 				System.out.printf("%s가 사망했다.\n", party.name);
