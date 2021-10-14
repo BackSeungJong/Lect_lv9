@@ -6,7 +6,7 @@ public class Unit {
 	public int turn;
 	public String name;
 	public int lv; // 1~10
-	public int exp;
+	public double exp;
 
 	public int tmphp;
 	public int hp;// 체력
@@ -27,7 +27,7 @@ public class Unit {
 	public Unit(String name, int hp, int A, int D, int S) {
 		this.name = name;
 		this.lv = 1;
-		this.exp = 100;
+		this.exp = 0;
 
 		this.hp = hp;
 		this.A = A;
@@ -43,7 +43,7 @@ public class Unit {
 		// [Exp] :
 		// [체력 : ] [공격력 : ] [방어력 : ] [속도 : ]
 		System.out.printf("<<파티원 닉네임>> %s\n[lv] %d\n", this.name, this.lv);
-		System.out.printf("[Exp] %d\n", this.exp);
+		System.out.printf("[Exp] %.1f\n", this.exp);
 		System.out.println("<<능력치>>");
 		System.out.printf("[체력] %d(+%d)\n", this.hp, this.addhp);
 		System.out.printf("[공격력] %d(+%d)\n", this.A, this.addA);

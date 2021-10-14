@@ -9,7 +9,8 @@ public class Player {
 
 	// 속성
 	public int lv; // 1~10
-	public int exp;
+	public double EXP[] = { 100.0, 200.0, 300.0, 400.0, 500.0, 600.0, 700.0, 800.0, 900.0, 1000.0 };
+	public double exp;
 
 	public int hp;
 	public int tmphp;// 체력
@@ -38,7 +39,7 @@ public class Player {
 		Player.heart = true;
 
 		this.lv = 1;
-		this.exp = this.lv * 120;
+		this.exp = 0;
 
 		this.hp = 100;
 		this.A = 10;
@@ -50,7 +51,7 @@ public class Player {
 	public void mystatus() {
 		// TODO Auto-generated method stub
 		System.out.printf("<<닉네임>> %s\n[lv] %d\n", this.nicname, this.lv);
-		System.out.printf("[Exp] %d\n", this.exp);
+		System.out.printf("[Exp] %.1f\n", this.exp);
 		System.out.println("<<능력치>>");
 		System.out.printf("[체력] %d(+%d)\n", this.hp, this.addhp);
 		System.out.printf("[공격력] %d(+%d)\n", this.A, this.addA);
@@ -283,5 +284,25 @@ public class Player {
 //		System.out.println("-------[인벤토리]-------");
 //		inven.showAllItem();
 		System.out.println(MainGame.bar);
+	}
+
+	// 플레이어 레벨업
+	public void lvUp() {
+		this.lv++;
+		this.hp += 100;
+		this.A += 10;
+		this.D += 5;
+		this.S += 3;
+		System.out.println("PLAYER 레벨업!");
+	}
+
+	public void PlvUp(Unit party) {
+		party.lv++;
+		party.hp += 100;
+		party.A += 10;
+		party.D += 5;
+		party.S += 3;
+		System.out.printf("%s레벨업!\n", party.name);
+
 	}
 }
