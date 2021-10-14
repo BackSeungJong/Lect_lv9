@@ -44,9 +44,7 @@ public class Game {
 				Player.setpos(Player.getpos() + 1);
 				int check = check();
 				if (check != -1) {
-					boolean a = fight(enemy.get(check));
-
-					if (!a) {
+					if (!fight(enemy.get(check))) {
 						break;
 					}
 				}
