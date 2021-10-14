@@ -63,6 +63,10 @@ public class Unit implements canAttack {
 	public void setCri(int cri) {
 		this.cri = cri;
 	}
+	
+	public void setpos(int pos) {
+		this.pos=pos;
+	}
 
 	// 메서드
 	@Override
