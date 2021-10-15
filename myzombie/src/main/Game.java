@@ -29,9 +29,9 @@ public class Game {
 	private void init() {
 		Player = new Hero("PLAYER", 100, 5, 1, 1, 5);
 		enemy.add(new Zombie("그냥좀비", 25, 5, 1, 3, 5));
-		enemy.add(new Zombie("힘쌘좀비", 45, 10, 2, 6, 10));
-		enemy.add(new Zombie("정예좀비", 65, 15, 3, 9, 15));
-		enemy.add(new ZombieKing("좀비왕", 100, 20, 4, 12, 20, 50));
+		enemy.add(new Zombie("힘쌘좀비", 45, 10, 3, 6, 10));
+		enemy.add(new Zombie("정예좀비", 65, 15, 5, 9, 15));
+		enemy.add(new ZombieKing("좀비왕", 250, 30, 10, 12, 20, 50));
 	}
 
 	public void run() {
@@ -58,8 +58,13 @@ public class Game {
 			// 체력회복
 			else if (sel == 2 && act == 1) {
 				int rnum = ran.nextInt(40) + 20;
-				Player.sethp(Player.gethp() + rnum);
-				System.out.println("체력을 " + rnum + "만큼 회복했다!");
+				if ((Player.gethp() + rnum) > Player.getHP()) {
+					Player.sethp(Player.getHP());
+					System.out.println("체력을 모두 회복했다!");
+				} else {
+					Player.sethp(Player.gethp() + rnum);
+					System.out.println("체력을 " + rnum + "만큼 회복했다!");
+				}
 				act = 2;
 			}
 			// 무기강화
@@ -132,6 +137,9 @@ public class Game {
 			return false;
 		} else {
 			System.out.println("승리했다!\n");
+			if (enemy instanceof Zombie) {
+				Player.dropReward((Zombie) enemy);
+			}
 			return true;
 		}
 	}

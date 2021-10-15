@@ -2,9 +2,14 @@ package unit;
 
 import java.util.Random;
 
-//interface
+//interface\
+//공격가능 인터페이스
 interface canAttack {
 	void attack(Unit target);
+}
+
+//아이템생성 인터페이스(좀비, 좀비킹)
+interface DropItem {
 }
 
 //상속 > 부모클래스 
@@ -56,6 +61,10 @@ public class Unit implements canAttack {
 	}
 
 	// setter
+	public void setHP(int HP) {
+		this.HP = HP;
+	}
+
 	public void sethp(int hp) {
 		this.hp = hp;
 	}

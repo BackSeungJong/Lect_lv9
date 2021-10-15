@@ -1,5 +1,7 @@
 package unit;
 
+import java.util.Random;
+
 public class Hero extends Unit {
 
 	private int medicine = 3;
@@ -28,6 +30,7 @@ public class Hero extends Unit {
 		}
 	}
 
+	@Override
 	public void attack(Unit target) {
 		if (target instanceof ZombieKing) {
 			if (((ZombieKing) target).shield > 0) {
@@ -51,4 +54,33 @@ public class Hero extends Unit {
 			super.attack(target);
 		}
 	}
+
+	// 아이템 떨구기
+	public void dropReward(Zombie unit) {
+		// upcasting
+		// Unit unit = (Unit) dr;
+		Random ran = new Random();
+		int rnum = ran.nextInt(4);
+
+		if (rnum == 0) {
+			if (medicine < 3) {
+				medicine++;
+				System.out.println("포션을 획득했습니다.\n");
+			} else {
+				System.out.println("포션수량이 가득차 더이상 획득할 수 없습니다.\n");
+			}
+		} else if (rnum == 1) {
+			setHP(getHP() + unit.getHP());
+			sethp(getHP());
+			System.out.println("체력 30 증가!\n");
+		} else if (rnum == 2) {
+			setatt(getatt() + unit.getatt());
+			System.out.printf("공격력 %d 증가!\n", unit.getatt());
+		} else if (rnum == 3) {
+			setdef(getdef() + unit.getdef());
+			System.out.printf("방어력 %d 증가!\n", unit.getdef());
+		}
+
+	}
+
 }
