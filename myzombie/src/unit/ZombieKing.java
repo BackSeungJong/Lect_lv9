@@ -16,4 +16,10 @@ public class ZombieKing extends Unit {
 	public void setshield(int shield) {
 		this.shield = shield;
 	}
+
+	@Override
+	public void print() {
+		System.out.printf("[이름] %s [체력] %d(+%d)\n", getname(), gethp(), getshield());
+		System.out.printf("[공격력] %d [방어력] %d\n", getatt(), getdef());
+	}
 }
