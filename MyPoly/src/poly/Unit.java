@@ -1,10 +1,14 @@
 package poly;
 
+import java.util.ArrayList;
+
 interface PossessSkill {
 	void skill(Unit target);
+
+	void skill(ArrayList<Unit> units);
 }
 
-public class Unit implements PossessSkill{
+public class Unit implements PossessSkill {
 	public String name;
 	public int Maxhp;
 	public int curhp;
@@ -23,11 +27,17 @@ public class Unit implements PossessSkill{
 
 	public void attack(Unit target) {
 		target.curhp -= att;
-		System.out.printf("[%d] -> [%d] 일반공격\n", this.name, target.name);
+		System.out.printf("[%s] [공격력 : %d] -> [%s] [HP : %d]\n", this.name, this.att, target.name, target.curhp);
 	}
 
 	@Override
 	public void skill(Unit target) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void skill(ArrayList<Unit> units) {
 		// TODO Auto-generated method stub
 		
 	}
