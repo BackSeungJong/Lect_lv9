@@ -1,7 +1,13 @@
 package models;
 
+import etc.Item;
+
 interface human {
 	public void getequipment();
+
+	public void equip(Item item);
+
+	public void unequip(Item item);
 }
 
 public class Unit {
@@ -12,6 +18,12 @@ public class Unit {
 	public int curmp;
 	public int att;
 	public int def;
+
+	// 장비속성
+	public int addhp;
+	public int addmp;
+	public int addatt;
+	public int adddef;
 
 	public Unit() {
 
@@ -41,8 +53,8 @@ public class Unit {
 	// 속성가져오기
 	public void getstatus() {
 		System.out.println("[속성]");
-		System.out.printf("[이름] %s [HP] %d [MP] %d\n", name, curhp, curmp);
-		System.out.printf("[ATT] %d [DEF] %d\n", att, def);
+		System.out.printf("[이름] %s [HP] %d(+%d) [MP] %d(+%d)\n", name, curhp, addhp, curmp, addmp);
+		System.out.printf("[ATT] %d(+%d) [DEF] %d(+%d)\n", att, addatt, def, adddef);
 		System.out.println();
 	}
 

@@ -2,6 +2,7 @@ package controller;
 
 import java.util.Scanner;
 
+import etc.Item;
 import models.Player;
 
 public class GameController {
@@ -10,11 +11,17 @@ public class GameController {
 
 	private void init() {
 		// TODO Auto-generated method stub
-		System.out.println("------[Green RPG]------");
-		System.out.print("[닉네임] ");
-		String name = sc.next();
-		player.setstatus(name, 100, 100, 10, 5);
-		System.out.println();
+		System.out.println("========[Green RPG]=========");
+//		System.out.print("[닉네임] ");
+//		String name = sc.next();
+		player.setstatus("PLAYER", 100, 100, 10, 5);
+		player.myinven.add(new Item(0, "나무칼", 0, 0, 3, 1));
+		player.myinven.add(new Item(0, "쇠칼", 0, 0, 5, 2));
+		player.myinven.add(new Item(1, "나무갑옷", 30, 0, 0, 3));
+		player.myinven.add(new Item(1, "쇠갑옷", 50, 0, 0, 5));
+		player.myinven.add(new Item(2, "반지", 20, 0, 2, 2));
+		player.myinven.add(new Item(2, "목걸이", 0, 20, 2, 2));
+		System.out.println("============================");
 	}
 
 	public void start() {
@@ -35,7 +42,7 @@ public class GameController {
 				// player의 속성, 아이템, 파티정보 가져오기
 				getinfo();
 			} else if (sel == 3) {
-
+				player.getinven();
 			} else if (sel == 4) {
 
 			} else if (sel == 5) {
@@ -52,5 +59,6 @@ public class GameController {
 		// 아이템
 		player.getequipment();
 		// 파티
+		player.getparty();
 	}
 }
