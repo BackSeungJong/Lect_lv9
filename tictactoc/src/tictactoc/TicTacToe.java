@@ -64,15 +64,6 @@ class MyPanel extends JPanel implements ActionListener {
 		}
 	}
 
-	public void btnreset() {
-		System.out.println("버튼 재성성");
-		for (int i = 0; i < map.length; i++) {
-
-			map[i] = new JButton();
-		}
-		btnset();
-	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
