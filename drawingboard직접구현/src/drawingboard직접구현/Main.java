@@ -27,30 +27,32 @@ class Mypanel extends MyUtil {
 		setBackground(Color.white);
 		setFocusable(true);
 
-		// setClose();
+		// 버튼 초기화 메서드
+		setClose();
 
 		addKeyListener(this);
 		addMouseListener(this);
 		addMouseMotionListener(this);
 
 	}
-//
-//	private void setClose() {
-//		// TODO Auto-generated method stub
-//		close.setBounds(550, 600, 100, 50);
-//		close.setText("close");
-//		close.addMouseListener(this);
-//		add(close);
-//	}
-//
-//	@Override
-//	public void mouseClicked(MouseEvent e) {
-//		JButton tmp = (JButton) e.getSource();
-//		if (tmp.equals(close)) {
-//			System.out.println("c");
-//
-//		}
-//	}
+
+	private void setClose() {
+		// TODO Auto-generated method stub
+		close.setBounds(550, 600, 100, 50);
+		close.setText("close");
+		close.addMouseListener(this);
+		add(close);
+	}
+
+	// 버튼클릭시
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		JButton tmp = (JButton) e.getSource();
+		if (tmp.equals(close)) {
+			System.out.println("if in");
+		}
+		System.out.println("if out");
+	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
@@ -92,7 +94,7 @@ class Mypanel extends MyUtil {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		System.out.println(c);
+		// System.out.println(c);
 		if (yy != 0 && xx != 0) {
 			if (xx - x < 0 && yy - y < 0) {
 				g.drawRect(xx, yy, l1, l2);
@@ -116,8 +118,7 @@ class Myframe extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		add(new Mypanel());
-
-		this.dispose();
+		
 		setVisible(true);
 		revalidate();
 	}
