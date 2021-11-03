@@ -52,6 +52,7 @@ class Mypanel extends MyUtil {
 			System.out.println("if in");
 		}
 		System.out.println("if out");
+		requestFocusInWindow();
 	}
 
 	@Override
@@ -118,7 +119,7 @@ class Myframe extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		add(new Mypanel());
-		
+
 		setVisible(true);
 		revalidate();
 	}
