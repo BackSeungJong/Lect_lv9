@@ -2,12 +2,11 @@ package drawingboard직접구현;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import java.awt.event.MouseListener;
 
 class Mypanel extends MyUtil {
 	private int x = 0;
@@ -17,8 +16,6 @@ class Mypanel extends MyUtil {
 	private int l1 = 0;
 	private int l2 = 0;
 
-	private JButton close = new JButton();
-
 	private boolean c = false;
 
 	public Mypanel() {
@@ -27,32 +24,9 @@ class Mypanel extends MyUtil {
 		setBackground(Color.white);
 		setFocusable(true);
 
-		// 버튼 초기화 메서드
-		setClose();
-
 		addKeyListener(this);
 		addMouseListener(this);
 		addMouseMotionListener(this);
-
-	}
-
-	private void setClose() {
-		// TODO Auto-generated method stub
-		close.setBounds(550, 600, 100, 50);
-		close.setText("close");
-		close.addMouseListener(this);
-		add(close);
-	}
-
-	// 버튼클릭시
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		JButton tmp = (JButton) e.getSource();
-		if (tmp.equals(close)) {
-			System.out.println("if in");
-		}
-		System.out.println("if out");
-		requestFocusInWindow();
 	}
 
 	@Override
@@ -111,17 +85,60 @@ class Mypanel extends MyUtil {
 	}
 }
 
-class Myframe extends JFrame {
+class Myframe extends JFrame implements MouseListener {
+
+	JButton btn = new JButton();
+
+	private void set() {
+		btn.setText("Close");
+		btn.setBounds(600, 700, 70, 50);
+		btn.addMouseListener(this);
+		add(btn);
+	}
+
 	public Myframe() {
 		super("그림판");
 		setLayout(null);
-		setBounds(500, 200, 700, 700);
+		setBounds(500, 200, 700, 800);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		add(new Mypanel());
+		set();
 
 		setVisible(true);
 		revalidate();
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		JButton tmp = (JButton) e.getSource();
+		if (tmp.equals(btn)) {
+			dispose();
+		}
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+
 	}
 }
 
